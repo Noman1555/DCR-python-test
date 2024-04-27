@@ -23,6 +23,9 @@ class LoadData:
             raise Exception("Failed to fetch data from URL")
 
     def add_country(self, data):
+        '''
+        Method to insert Countries data in db
+        '''
         region_name = data.get("region", "Unknown")
         region_id = self.get_region_id(region_name)
 
@@ -35,6 +38,8 @@ class LoadData:
             data["alpha2Code"],
             data["alpha3Code"],
             data["population"],
+            data["topLevelDomain"][0],
+            data["capital"],
             region_id,
         )
 

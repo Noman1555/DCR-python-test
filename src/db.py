@@ -39,7 +39,7 @@ class Region(DBO):
         self.get_by_name(name)
 
     @classmethod
-    def list_all(self):
+    def list_all(cls):
         '''
         Class method
         @Description: A generator function to list all regions
@@ -55,13 +55,13 @@ class Region(DBO):
             yield obj
 
 class Country(DBO):
-    def insert(self, name, alpha2Code, alpha3Code, population, region_id):
+    def insert(self, name, alpha2Code, alpha3Code, population, top_level_domain, capital, region_id):
         insert_query = (
-            "INSERT INTO country (name, alpha2Code, alpha3Code, population, "
-            "region_id) VALUES (?, ?, ?, ?, ?)"
+            "INSERT INTO country (name, alpha2Code, alpha3Code, population, top_level_domain, capital,"
+            "region_id) VALUES (?, ?, ?, ?, ?, ?, ?)"
         )
         self.cursor.execute(
-            insert_query, (name, alpha2Code, alpha3Code, population, region_id)
+            insert_query, (name, alpha2Code, alpha3Code, population, top_level_domain, capital, region_id)
         )
         conn.commit()
         self.get_by_name(name)
@@ -81,7 +81,7 @@ class Country(DBO):
         dbo = DBO()
         select_statement = """
             SELECT c.name AS country_name, c.alpha2Code, c.alpha3Code,
-                    c.population, r.name AS region_name
+                    c.population, r.name AS region_name, c.top_level_domain, c.capital
                 FROM country c
                 JOIN region r ON c.region_id = r.id;
             """
