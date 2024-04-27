@@ -1,79 +1,85 @@
-# Digital Control Room - Python Test
+# Country Data Management System
 
-Thank you for thaking the time to complete this exercise.
+This project is a Python-based system for managing country data, including information such as country names, codes, populations, and regions. It includes functionality to create and populate a database with country data from an external source, as well as to perform various operations on the data.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Introduction
 
-Please clone (don't fork) this repository, complete the exercises below and then upload to a public repository on github and send us the link.
+The Country Data Management System provides a set of Python scripts to manage country data stored in a SQLite database. It allows users to create and populate the database with country data retrieved from an external JSON file, perform various operations on the data, and generate statistics about regions and countries.
 
-Please don't spend more than 2 hours on this task (not including initial download and setup). If you reach 2 hours, please commit your code as-is to your repository.
+## Requirements
 
-## Project Setup
+To run this project, you need:
 
-You will need python3.8+ to run this code.
+- Python 3.x
+- SQLite (if not already installed)
+- Requests library (for fetching data from the external source)
 
-```bash
-git clone git@github.com:<TBC>
+## Installation
 
-cd dcr-python-test
-git remote remove origin
-git remote add origin <Your Repository>
+1. Clone the repository:
 
-cd src
-python3 list_countries.py
-```
+   ```bash
+   git clone https://github.com/Noman1555/DCR-python-test.git
+   ```
 
-## Exercises
+2. Navigate to the project directory:
 
-### Exercise 1 - Add Stats
+   ```bash
+   cd DCR-python-test
+   ```
 
-Please add a script that will provide aggregated stats for each region. The stats should contain:
- * The region's name
- * The number of countries in that region (a simple count)
- * The total population of the region (the sum of the population of each country)
+3. (Optional) Set up a virtual environment:
 
-The output should be JSON with a format:
-```json
-{
-    "regions": [
-        {
-        "name": "Africa",
-        "number_countries": xxx,
-        "total_population": xxx
-        },
-        {
-        "name": "Americas",
-        "number_countries": xxx,
-        "total_population": xxx
-        },
-        ...
-    ]
-}
-```
+   ```bash
+   python3 -m venv env
+   source env/bin/activate  # For Unix/Linux
+   # OR
+   .\env\Scripts\activate   # For Windows
+   ```
 
-### Exercise 2 - Integrate with API
+4. Install dependencies from requirements.txt:
 
-The script:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+### Populating the Database
+
+To create and populate the database with country data from an external JSON file, run the following command:
+
 ```bash
 python load_data.py
 ```
-currently populates the database from a local JSON file. Please update this management command to obtain the JSON input data from this url: `https://storage.googleapis.com/dcr-django-test/countries.json`
 
-### Exercise 3 - Store additional Data
+### Running Operations
 
-The previous script:
+To perform operations on the country data, such as listing all countries or generating statistics for regions, you can run the respective scripts:
+
 ```bash
-python load_data.py
+python list_countries.py
+python stats.py
 ```
-currently extracts and stores the data:
- * name
- * alpha2Code
- * alpha3Code
- * population
- * region
 
-Please update the database tables and management command to also import:
- * topLevelDomain
- * capital
+### Project Structure
 
- Please record any SQL commands executed to modify the database schema.
+- `data/`: Contains external data files (`countries.json`, `countries.db`)
+- `src/`: Contains Python scripts for database management and data operations
+  - `create_db.py`: Script to create the database schema
+  - `db.py`: Contains database connection and management classes
+  - `list_countries.py`: Script to list all countries in the database
+  - `load_data.py`: Script to populate the database with country data
+  - `stats.py`: Script to generate statistics for regions
+- `README.md`: This README file
+---
