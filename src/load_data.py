@@ -1,20 +1,26 @@
-import json
-
+'''
+Script to load data from a API and insert it into the database
+'''
+import requests
 from db import Country, Region
 
-
 class LoadData:
-    DATA_FILE = "../data/countries.json"
+    '''
+    @Description: Load data from a JSON file and insert it into the database
+    '''
+    DATA_URL = "https://storage.googleapis.com/dcr-django-test/countries.json"
 
     def __init__(self):
         # Cache of regions
         self.regions = {}
 
     def get_raw_data(self):
-        data = None
-        with open(self.DATA_FILE) as f:
-            data = json.load(f)
-        return data
+        response = requests.get(self.DATA_URL)
+        if response.status_code == 200:
+            data = response.json()
+            return data
+        else:
+            raise Exception("Failed to fetch data from URL")
 
     def add_country(self, data):
         region_name = data.get("region", "Unknown")
@@ -31,7 +37,6 @@ class LoadData:
             data["population"],
             region_id,
         )
-        print(country.data)
 
     def get_region_id(self, region_name):
         if region_name not in self.regions:
