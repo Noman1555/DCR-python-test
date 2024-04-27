@@ -50,7 +50,7 @@ To run this project, you need:
 4. Install dependencies from requirements.txt:
 
    ```bash
-   pip install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 
 ## Usage
@@ -60,7 +60,11 @@ To run this project, you need:
 To create and populate the database with country data from an external JSON file, run the following command:
 
 ```bash
-python load_data.py
+cd src
+```
+
+```bash
+python3 load_data.py
 ```
 
 ### Running Operations
@@ -68,8 +72,8 @@ python load_data.py
 To perform operations on the country data, such as listing all countries or generating statistics for regions, you can run the respective scripts:
 
 ```bash
-python list_countries.py
-python stats.py
+python3 list_countries.py
+python3 stats.py
 ```
 
 ### Project Structure
